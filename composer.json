@@ -1,0 +1,55 @@
+{
+	"name" : "coka/rest-request-validator-bundle",
+	"type" : "symfony-bundle",
+	"description" : "Help the user input high quality data into your web services REST",
+	"license" : "MIT",
+	"require" : {
+		"php" : ">=7.2",
+		"doctrine/annotations" : "^1.6",
+		"symfony/config" : "^3.4 || ^4.0",
+		"symfony/dependency-injection" : "^3.4 || ^4.0",
+		"symfony/http-kernel" : "^3.4 || ^4.0",
+		"symfony/security-core" : "^3.4 || ^4.0",
+		"symfony/translation" : "^3.4 || ^4.0",
+		"symfony/validator" : "^3.4 || ^4.0",
+		"symfony/serializer" : "^3.4 || ^4.0"
+	},
+	"suggest" : {
+		"jms/serializer-bundle" : "^2.3"
+	},
+	"keywords" : [
+		"REST",
+		"Input Validation",
+		"Input Filtering",
+		"Validate content types"
+	],
+	"authors" : [{
+			"name" : "Cedrick Oka Baidai",
+			"email" : "okacedrick@gmail.com"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"Oka\\RESTRequestValidatorBundle\\" : "src"
+		},
+		"exclude-from-classmap" : [
+			"/tests/"
+		]
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Oka\\RESTRequestValidatorBundle\\Tests\\" : "tests/"
+		}
+	},
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "1.x.x-dev"
+		},
+		"symfony" : {
+			"allow-contrib" : "true"
+		}
+	},
+	"support" : {
+		"docs" : "https://github.com/CedrickOka/rest-request-validator-bundle/blob/master/src/Resources/doc/index.md"
+	}
+}

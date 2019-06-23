@@ -1,0 +1,12 @@
+request:
+    server_error: 'An unexpected error occurred while processing the request.'
+    resource:
+        not_found: 'The resource "%resource%" can not be found or does not exist.'
+    version:
+        not_acceptable: 'The request does not support the API version number "%version%".'
+    protocol:
+        not_acceptable: 'The request does not support the protocol "%protocol%".'
+    format:
+        invalid: 'The format of the query is not valid or malformed.'
+        unsupported: 'The requested content type is not supported by the REST service.'
+        unacceptable: 'Unacceptable response format with request accept: "%formats%".'

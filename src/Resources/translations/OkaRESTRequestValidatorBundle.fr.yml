@@ -1,0 +1,12 @@
+request:
+    server_error: 'Une erreur inattendue est survenue pendant le traitement de la requête.'
+    resource:
+        not_found: 'La ressource "%resource%" est introuvable ou n''existe pas.'
+    version:
+        not_acceptable: 'La requête ne prend pas en charge le numero de version "%version%" pour cette méthode de l''API.'
+    protocol:
+        not_acceptable: 'La requête ne prend pas en charge le protocole "%protocol%" pour cette méthode de l''API.'
+    format:
+        invalid: 'Le format de la requête n''est pas valide ou malformée.'
+        unsupported: 'Le type de contenu envoyé n''est pas pris en charge par le service REST.'
+        unacceptable: 'Le format de la réponse est non pris en charge avec la requete qui accepte: "%formats%".'

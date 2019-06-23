@@ -1,0 +1,21 @@
+services:
+    Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory:
+        public: true
+        arguments: ['']
+
+    oka_rest_request_validator.error_response.factory:
+        alias: Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory
+        public: true
+
+# Listener
+    Oka\RESTRequestValidatorBundle\EventListener\AnnotationListener:
+        arguments: ['@annotations.cached_reader', '@validator', '@translator', '@oka_rest_request_validator.error_response.factory', '@logger']
+        tags:
+          - {name: kernel.event_listener, event: kernel.controller, method: onKernelController}
+
+    oka_rest_request_validator.request.event_listener:
+        class: Oka\RESTRequestValidatorBundle\EventListener\RequestListener
+        arguments: ['@translator', '@oka_rest_request_validator.error_response.factory', '@logger', '%kernel.environment%']
+        tags:
+          - {name: kernel.event_listener, event: kernel.response, method: onKernelResponse}
+          - {name: kernel.event_listener, event: kernel.exception, method: onKernelException}
