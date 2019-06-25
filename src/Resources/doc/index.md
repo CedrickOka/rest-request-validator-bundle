@@ -1,6 +1,6 @@
 # Getting Started With OkaRESTRequestValidatorBundle
 
-This bundle provides an WSSE authenticator system.
+This bundle help the user input high quality data into your web services REST.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```bash
-$ composer require coka/cors-bundle
+$ composer require coka/rest-request-validator-bundle
 ```
 
 This command requires you to have Composer installed globally, as explained
@@ -69,12 +69,15 @@ return [
 
 ### Step 3: Configure the Bundle
 
-Add the following configuration to your `config/packages/oka_cors.yaml`.
+Add the following configuration to your `config/packages/oka_rest_request_validator_bundle.yaml`.
 
 ``` yaml
-# config/packages/oka_cors.yaml
-oka_cors:
-    default:
-        expose_headers: ['Accept-Encoding']
-        max_age: 3600
+# config/packages/oka_rest_request_validator_bundle.yaml
+oka_rest_request_validator_bundle:
+    response:
+        error_builder_class: 'Oka\RESTRequestValidatorBundle\Model\ErrorResponseBuilderInterface'
 ```
+
+## How use this?
+
+Now that the bundle is installed

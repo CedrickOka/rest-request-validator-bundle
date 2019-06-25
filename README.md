@@ -1,7 +1,7 @@
 OkaRESTRequestValidatorBundle
 =============================
 
-This bundle provides a WSSE authentication provider.
+This bundle help the user input high quality data into your web services REST.
 
 [![Latest Stable Version](https://poser.pugx.org/coka/rest-request-validator-bundle/v/stable)](https://packagist.org/packages/coka/rest-request-validator-bundle)
 [![Total Downloads](https://poser.pugx.org/coka/rest-request-validator-bundle/downloads)](https://packagist.org/packages/coka/rest-request-validator-bundle)
