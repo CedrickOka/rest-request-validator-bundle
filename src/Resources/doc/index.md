@@ -75,7 +75,7 @@ Add the following configuration to your `config/packages/oka_rest_request_valida
 # config/packages/oka_rest_request_validator_bundle.yaml
 oka_rest_request_validator_bundle:
     response:
-        error_builder_class: 'Oka\RESTRequestValidatorBundle\Model\ErrorResponseBuilderInterface'
+        error_builder_class: 'Oka\RESTRequestValidatorBundle\Util\ErrorResponseBuilder'
 ```
 
 ## How use this?
