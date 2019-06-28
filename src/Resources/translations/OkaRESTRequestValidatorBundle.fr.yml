@@ -8,5 +8,5 @@ request:
         not_acceptable: 'La requête ne prend pas en charge le protocole "%protocol%" pour cette méthode de l''API.'
     format:
         invalid: 'Le format de la requête n''est pas valide ou malformée.'
-        unsupported: 'Le type de contenu envoyé n''est pas pris en charge par le service REST.'
+        unsupported: 'Le type de contenu "%format%" envoyé n''est pas pris en charge par le service REST.'
         unacceptable: 'Le format de la réponse est non pris en charge avec la requete qui accepte: "%formats%".'

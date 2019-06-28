@@ -8,5 +8,5 @@ request:
         not_acceptable: 'The request does not support the protocol "%protocol%".'
     format:
         invalid: 'The format of the query is not valid or malformed.'
-        unsupported: 'The requested content type is not supported by the REST service.'
+        unsupported: 'The requested content type "%format%" is not supported by the REST service.'
         unacceptable: 'Unacceptable response format with request accept: "%formats%".'

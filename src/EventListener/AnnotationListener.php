@@ -166,7 +166,7 @@ class AnnotationListener
 			// Validate request content types
 			if (false === empty($annotation->getFormats())) {
 				if (false === in_array($request->getContentType(), $annotation->getFormats())) {
-					$message = $this->translator->trans('request.format.unsupported', [], 'OkaRESTRequestValidatorBundle');
+					$message = $this->translator->trans('request.format.unsupported', ['%format%' => $request->getContentType()], 'OkaRESTRequestValidatorBundle');
 					
 					$event->setController(function(Request $request) use ($message, $responseFormat) {
 						return $this->errorFactory->create($message, 415, null, [], 415, [], $responseFormat);
