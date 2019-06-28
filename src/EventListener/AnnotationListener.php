@@ -64,7 +64,7 @@ class AnnotationListener
 	/**
 	 * @param FilterControllerEvent $event
 	 */
-	public function onController(FilterControllerEvent $event)
+	public function onKernelController(FilterControllerEvent $event)
 	{
 		if (false === $event->isMasterRequest() || false === is_array($controller = $event->getController())) {
 			return;

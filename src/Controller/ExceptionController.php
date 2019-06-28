@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * 
@@ -35,6 +36,8 @@ class ExceptionController extends AbstractController
 	 */
 	public function showAction(Request $request, FlattenException $exception, DebugLoggerInterface $logger = null)
 	{
+		/** @var \Symfony\Component\Translation\TranslatorInterface $translator */
+		$translator = $this->get('translator');
 		/** @var \Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory $errorResponseFactory */
 		$errorResponseFactory = $this->get('oka_rest_request_validator.error_response.factory');
 		$format = $request->attributes->get('format') ?? RequestUtil::getFirstAcceptableFormat($request, 'json');
@@ -46,7 +49,7 @@ class ExceptionController extends AbstractController
 		} elseif($exception instanceof BadRequestHttpException) {
 			$response = $errorResponseFactory->createFromException($exception, null, [], $exception->getStatusCode(), [], $format);
 		} elseif ($exception instanceof NotFoundHttpException) {
-			$response = $errorResponseFactory->create($this->translator->trans('request.resource.not_found', ['%resource%' => $request->getRequestUri()], 'OkaRESTRequestValidatorBundle'), 404, null, [], 404, [], $format);
+			$response = $errorResponseFactory->create($translator->trans('request.resource.not_found', ['%resource%' => $request->getRequestUri()], 'OkaRESTRequestValidatorBundle'), 404, null, [], 404, [], $format);
 		} elseif ($exception instanceof MethodNotAllowedHttpException) {
 			$response = $errorResponseFactory->createFromException($exception, null, [], $exception->getStatusCode(), [], $format);
 		} elseif ($exception instanceof NotAcceptableHttpException) {
@@ -54,7 +57,7 @@ class ExceptionController extends AbstractController
 		} elseif ($exception instanceof HttpException) {
 			$response = $errorResponseFactory->createFromException($exception, null, [], $exception->getStatusCode(), [], $format);
 		} else {
-			$response = $errorResponseFactory->create($this->translator->trans('request.server_error', [], 'OkaRESTRequestValidatorBundle'), 500, null, [], 500, [], $format);
+			$response = $errorResponseFactory->create($translator->trans('request.server_error', [], 'OkaRESTRequestValidatorBundle'), 500, null, [], 500, [], $format);
 		}
 		
 		return $response;
@@ -62,6 +65,7 @@ class ExceptionController extends AbstractController
 	
 	public static function getSubscribedServices() {
 		return array_merge(parent::getSubscribedServices(), [
+				'translator' => '?'.TranslatorInterface::class,
 				'oka_rest_request_validator.error_response.factory' => '?'.ErrorResponseFactory::class
 		]);
 	}

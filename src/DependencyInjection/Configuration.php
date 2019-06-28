@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
 						->children()
 							->scalarNode('controller')
 								->cannotBeEmpty()
-								->defaultValue('RESTRequestValidatorBundle:Exception:show')
+								->defaultValue('OkaRESTRequestValidatorBundle:Exception:show')
 							->end()
 						->end()
 					->end()
