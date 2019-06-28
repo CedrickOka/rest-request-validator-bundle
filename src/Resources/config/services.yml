@@ -12,10 +12,9 @@ services:
         arguments: ['@annotations.cached_reader', '@validator', '@translator', '@oka_rest_request_validator.error_response.factory', '@logger']
         tags:
           - {name: kernel.event_listener, event: kernel.controller, method: onKernelController}
+          - {name: monolog.logger, channel: request}
 
-    oka_rest_request_validator.request.event_listener:
-        class: Oka\RESTRequestValidatorBundle\EventListener\RequestListener
-        arguments: ['@translator', '@oka_rest_request_validator.error_response.factory', '@logger', '%kernel.environment%']
+    oka_rest_request_validator.response.event_listener:
+        class: Oka\RESTRequestValidatorBundle\EventListener\ResponseListener
         tags:
           - {name: kernel.event_listener, event: kernel.response, method: onKernelResponse}
-          - {name: kernel.event_listener, event: kernel.exception, method: onKernelException}

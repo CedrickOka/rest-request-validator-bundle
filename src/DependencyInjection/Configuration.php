@@ -30,6 +30,11 @@ class Configuration implements ConfigurationInterface
 		$rootNode
 				->addDefaultsIfNotSet()
 				->children()
+					->scalarNode('exception_controller')
+						->cannotBeEmpty()   
+						->defaultValue('RESTRequestValidatorBundle:Exception:show')
+					->end()
+					->booleanNode('enabled_exception_listener')->defaultTrue()->end()
 					->arrayNode('response')
 						->addDefaultsIfNotSet()
 						->children()

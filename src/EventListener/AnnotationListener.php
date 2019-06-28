@@ -113,33 +113,37 @@ class AnnotationListener
 			$request->attributes->set('format', $annotation->getFormats()[0]);
 		}
 		
-		$response = null;
 		$version = $request->attributes->get('version');
 		$protocol = $request->attributes->get('protocol');
 		$format = RequestUtil::getFirstAcceptableFormat($request, $annotation->getFormats()[0]);
 		
 		switch (false) {
 			case version_compare($version, $annotation->getVersion(), $annotation->getVersionOperator()):
-				$response = $this->errorFactory->create($this->translator->trans('request.version.not_acceptable', ['%version%' => $version], 'OkaRESTRequestValidatorBundle'), 405, null, [], 405, [], $format);
+				$message = $this->translator->trans('request.version.not_acceptable', ['%version%' => $version], 'OkaRESTRequestValidatorBundle');
+				$statusCode = 405;
 				break;
 				
 			case strtolower($protocol) === $annotation->getProtocol():
-				$response = $this->errorFactory->create($this->translator->trans('request.protocol.not_acceptable', ['%version%' => $protocol], 'OkaRESTRequestValidatorBundle'), 405, null, [], 405, [], $format);
+				$message = $this->translator->trans('request.protocol.not_acceptable', ['%protocol%' => $protocol], 'OkaRESTRequestValidatorBundle');
+				$statusCode = 405;
 				break;
 				
 			case $request->attributes->has('format'):
-				$response = $this->errorFactory->create($this->translator->trans('request.format.unacceptable', ['%formats%' => implode(', ', $acceptablesContentTypes)], 'OkaRESTRequestValidatorBundle'), 406, null, [], 406, [], $format);
+				$message = $this->translator->trans('request.format.unacceptable', ['%formats%' => implode(', ', $acceptablesContentTypes)], 'OkaRESTRequestValidatorBundle');
+				$statusCode = 406;
 				break;
+				
+			default:
+				$request->attributes->set('versionNumber', $annotation->getVersionNumber());
+				return;
 		}
 		
-		if (null === $response) {
-			$version = $request->attributes->set('versionNumber', $annotation->getVersionNumber());
-		} else {
-			$event->setController(function() use ($response) {
-				return $response;
-			});
-			$event->stopPropagation();
-		}
+		$event->setController(function() use ($message, $statusCode, $format) {
+			return $this->errorFactory->create($message, $statusCode, null, [], $statusCode, [], $format);
+		});
+		$event->stopPropagation();
+		
+		$this->logDeb($message, $request);
 	}
 	
 	/**
@@ -162,10 +166,13 @@ class AnnotationListener
 			// Validate request content types
 			if (false === empty($annotation->getFormats())) {
 				if (false === in_array($request->getContentType(), $annotation->getFormats())) {
-					$event->setController(function(Request $request) use ($annotation, $responseFormat) {
-						return $this->errorFactory->create($this->translator->trans('request.format.unsupported', [], 'OkaRESTRequestValidatorBundle'), 415, null, [], 415, [], $responseFormat);
+					$message = $this->translator->trans('request.format.unsupported', [], 'OkaRESTRequestValidatorBundle');
+					
+					$event->setController(function(Request $request) use ($message, $responseFormat) {
+						return $this->errorFactory->create($message, 415, null, [], 415, [], $responseFormat);
 					});
 					$event->stopPropagation();
+					$this->logDeb($message, $request);
 					return;
 				}
 				
@@ -178,12 +185,13 @@ class AnnotationListener
 		}
 		
 		if (null === $requestContent || false === $requestContent) {
-			$event->setController(function(Request $request) use ($annotation, $responseFormat) {
-				$message = $this->translator->trans($annotation->getValidationErrorMessage(), $annotation->getTranslationParameters(), $annotation->getTranslationDomain());
-				
+			$message = $this->translator->trans($annotation->getValidationErrorMessage(), $annotation->getTranslationParameters(), $annotation->getTranslationDomain());
+			
+			$event->setController(function(Request $request) use ($message, $responseFormat) {
 				return $this->errorFactory->create($message, 400, null, [], 400, [], $responseFormat);
 			});
 			$event->stopPropagation();
+			$this->logDeb($message, $request);
 			return;
 		}
 		
@@ -216,9 +224,9 @@ class AnnotationListener
 		if (false === $validationHasFailed) {
 			$request->attributes->set('requestContent', $requestContent);
 		} else {
-			$event->setController(function(Request $request) use ($annotation, $errors, $responseFormat) {
-				$message = $this->translator->trans($annotation->getValidationErrorMessage(), $annotation->getTranslationParameters(), $annotation->getTranslationDomain());
-				
+			$message = $this->translator->trans($annotation->getValidationErrorMessage(), $annotation->getTranslationParameters(), $annotation->getTranslationDomain());
+			
+			$event->setController(function(Request $request) use ($message, $errors, $responseFormat) {
 				if (null === $errors) {
 					$response = $this->errorFactory->create($message, 400, null, [], 400, [], $responseFormat);
 				} else {
@@ -228,6 +236,27 @@ class AnnotationListener
 				return $response;
 			});
 			$event->stopPropagation();
+			$this->logDeb($message, $request);
 		}
+	}
+	
+	private function logInf(string $message, Request $request)
+	{
+		$this->logger->info($message, self::createLogContext($request));
+	}
+	
+	private function logDeb(string $message, Request $request)
+	{
+		$this->logger->debug($message, self::createLogContext($request));
+	}
+	
+	private function logWar(string $message, Request $request)
+	{
+		$this->logger->warning($message, self::createLogContext($request));
+	}
+	
+	private static function createLogContext(Request $request)
+	{
+		return ['clientIp' => $request->getClientIp(), 'uri' => $request->getUri(), 'contentType' => $request->getContentType()];
 	}
 }

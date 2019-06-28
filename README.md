@@ -9,7 +9,7 @@ This bundle help the user input high quality data into your web services REST.
 [![License](https://poser.pugx.org/coka/rest-request-validator-bundle/license)](https://packagist.org/packages/coka/rest-request-validator-bundle)
 [![Monthly Downloads](https://poser.pugx.org/coka/rest-request-validator-bundle/d/monthly)](https://packagist.org/packages/coka/rest-request-validator-bundle)
 [![Daily Downloads](https://poser.pugx.org/coka/rest-request-validator-bundle/d/daily)](https://packagist.org/packages/coka/rest-request-validator-bundle)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f59a4801-bab9-4032-96c1-e246e9a4ecda/mini.png)](https://insight.sensiolabs.com/projects/f59a4801-bab9-4032-96c1-e246e9a4ecda)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/46305805-2ecf-45f2-a070-0120edb47ccf/mini.png)](https://insight.sensiolabs.com/projects/46305805-2ecf-45f2-a070-0120edb47ccf)
 
 Latest updates
 --------------
