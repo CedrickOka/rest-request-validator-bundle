@@ -14,7 +14,7 @@ final class StringUtil
 	 */
 	public static function stringCast($value)
 	{
-		if (is_array($value)) {
+		if (true === is_array($value)) {
 			$cast = '';
 			foreach ($value as $content) {
 				$cast .= is_array($content) ? self::stringCast($value) : ' ' . (string) $content;

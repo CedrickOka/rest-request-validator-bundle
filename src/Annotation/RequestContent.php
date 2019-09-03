@@ -70,8 +70,8 @@ final class RequestContent
 	public function __construct(array $data)
 	{
 		$this->constraints = $data['constraints'] ?? null;
-		$this->canBeEmpty = (boolean) ($data['can_be_empty'] ?? false);
-		$this->enableValidation = (boolean) ($data['enable_validation'] ?? false);
+		$this->canBeEmpty = (bool) ($data['can_be_empty'] ?? false);
+		$this->enableValidation = (bool) ($data['enable_validation'] ?? true);
 		
 		if (null === $this->constraints && true === $this->enableValidation) {
 			throw new \InvalidArgumentException('You must define a "constraints" attribute for each @RequestContent annotation while request validation is enabled.');
