@@ -30,7 +30,7 @@ class OkaRESTRequestValidatorExtension extends Extension
 		$loader->load('services.yml');
 		
 		$definition = $container->getDefinition(ErrorResponseFactory::class);
-		$definition->replaceArgument(0, $config['response']['error_builder_class']);
+		$definition->replaceArgument(1, $config['response']['error_builder_class']);
 		
 		if (true === $config['exception']['enabled']) {
 			$exceptionListener = $container->setDefinition('oka_rest_request_validator.exception.event_listener', new Definition(ExceptionListener::class));

@@ -1,3 +1,5 @@
+'Access Denied.': 'Access Denied.'
+
 request:
     server_error: 'An unexpected error occurred while processing the request.'
     resource:

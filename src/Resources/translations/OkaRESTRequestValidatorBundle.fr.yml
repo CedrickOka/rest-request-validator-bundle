@@ -1,3 +1,5 @@
+'Access Denied.': 'Vous n''êtes pas autorisé à accèder à cette resource.'
+
 request:
     server_error: 'Une erreur inattendue est survenue pendant le traitement de la requête.'
     resource:

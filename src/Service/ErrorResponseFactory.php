@@ -2,11 +2,13 @@
 namespace Oka\RESTRequestValidatorBundle\Service;
 
 use Oka\RESTRequestValidatorBundle\Model\ErrorResponseBuilderInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Oka\RESTRequestValidatorBundle\Util\ErrorResponseBuilder;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Debug\Exception\FlattenException;
 
 /**
  * 
@@ -15,6 +17,11 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 class ErrorResponseFactory
 {
+	/**
+	 * @var TranslatorInterface $translator
+	 */
+	protected $translator;
+	
 	/**
 	 * @var string $builderClass
 	 */
@@ -25,8 +32,9 @@ class ErrorResponseFactory
 	 * 
 	 * @param string $builderClass
 	 */
-	public function __construct($builderClass = null)
+	public function __construct(TranslatorInterface $translator, $builderClass = null)
 	{
+		$this->translator = $translator;
 		$this->builderClass = $builderClass;
 	}
 	
@@ -134,7 +142,7 @@ class ErrorResponseFactory
 	 */
 	public function createFromException(\Exception $exception, string $propertyPath = null, array $extras = [], int $httpStatusCode = null, array $httpHeaders = [], string $format = 'json')
 	{
-		if ($exception instanceof HttpExceptionInterface) {
+		if ($exception instanceof HttpExceptionInterface || $exception instanceof FlattenException) {
 			$httpStatusCode = $httpStatusCode ?? $exception->getStatusCode();
 			$httpHeaders = $httpHeaders ?: $exception->getHeaders();
 		} else {
@@ -142,7 +150,7 @@ class ErrorResponseFactory
 		}
 		
 		return $this->getBuilderInstance()
-					->setError($exception->getMessage(), (int) $exception->getCode(), $propertyPath, $extras)
+					->setError($this->translator->trans($exception->getMessage(), [], 'OkaRESTRequestValidatorBundle'), (int) $exception->getCode(), $propertyPath, $extras)
 					->setHttpStatusCode($httpStatusCode)
 					->setHttpHeaders($httpHeaders)
 					->setFormat($format)
