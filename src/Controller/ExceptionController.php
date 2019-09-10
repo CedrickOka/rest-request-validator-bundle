@@ -6,7 +6,6 @@ use Oka\RESTRequestValidatorBundle\Util\RequestUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Debug\Exception\FlattenException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -41,20 +40,17 @@ class ExceptionController extends AbstractController
 			case $exception->getClass() === NotFoundHttpException::class:
 				return $this->get('oka_rest_request_validator.error_response.factory')->create(
 					$this->get('translator')->trans('request.resource.not_found', ['%resource%' => $request->getRequestUri()], 'OkaRESTRequestValidatorBundle'),
-					404,
+					$exception->getStatusCode(),
 					null,
 					[],
-					404,
+					$exception->getStatusCode(),
 					[],
 					$format
 				);
 				
-			case $exception->getClass() === HttpException::class:
-				return $this->get('oka_rest_request_validator.error_response.factory')->createFromException($exception, null, [], $exception->getStatusCode(), [], $format);
-				
 			default:
 				return $this->get('oka_rest_request_validator.error_response.factory')->create(
-					$this->get('translator')->trans('request.server_error', [], 'OkaRESTRequestValidatorBundle'),
+					$this->get('translator')->trans($exception->getMessage(), [], 'OkaRESTRequestValidatorBundle'),
 					$exception->getStatusCode(),
 					null,
 					[],

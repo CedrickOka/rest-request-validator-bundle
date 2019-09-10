@@ -2,13 +2,11 @@
 namespace Oka\RESTRequestValidatorBundle\Service;
 
 use Oka\RESTRequestValidatorBundle\Model\ErrorResponseBuilderInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Oka\RESTRequestValidatorBundle\Util\ErrorResponseBuilder;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Debug\Exception\FlattenException;
 
 /**
  * 
@@ -63,7 +61,7 @@ class ErrorResponseFactory
 	/**
 	 * Create error response from FormErrorIterator class
 	 * 
-	 * @param FormErrorIterator $errors
+	 * @param \Symfony\Component\Form\FormErrorIterator $errors
 	 * @param string $message
 	 * @param int $code
 	 * @param string $propertyPath
@@ -113,7 +111,7 @@ class ErrorResponseFactory
 		/** @var \Symfony\Component\Validator\ConstraintViolationInterface $error */
 		foreach ($errors as $error) {
 			switch (true) {
-				case UniqueEntity::NOT_UNIQUE_ERROR === $error->getCode():
+				case \Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity::NOT_UNIQUE_ERROR === $error->getCode():
 					$code = 409;
 					break;
 					
@@ -142,7 +140,7 @@ class ErrorResponseFactory
 	 */
 	public function createFromException(\Exception $exception, string $propertyPath = null, array $extras = [], int $httpStatusCode = null, array $httpHeaders = [], string $format = 'json')
 	{
-		if ($exception instanceof HttpExceptionInterface || $exception instanceof FlattenException) {
+		if ($exception instanceof HttpExceptionInterface) {
 			$httpStatusCode = $httpStatusCode ?? $exception->getStatusCode();
 			$httpHeaders = $httpHeaders ?: $exception->getHeaders();
 		} else {
