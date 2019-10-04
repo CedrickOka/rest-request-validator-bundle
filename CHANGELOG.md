@@ -1,6 +1,14 @@
 Changelog
 =========
 
+#### 1.1.4 (2019-10-04)
+
+* Updated composer.json file.
+
+#### 1.1.3 (2019-10-04)
+
+* Fix bug.
+
 #### 1.1.2 (2019-09-10)
 
 * Fix bug.

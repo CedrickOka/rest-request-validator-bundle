@@ -30,6 +30,7 @@
 	"require" : {
 		"php" : ">=7.2",
 		"doctrine/annotations" : "^1.6",
+		"doctrine/cache" : "^1.8",
 		"symfony/config" : "^3.4 || ^4.0",
 		"symfony/dependency-injection" : "^3.4 || ^4.0",
 		"symfony/http-kernel" : "^3.4 || ^4.0",
@@ -37,8 +38,7 @@
 		"symfony/translation" : "^3.4 || ^4.0",
 		"symfony/validator" : "^3.4 || ^4.0",
 		"symfony/serializer" : "^3.4 || ^4.0",
-		"symfony/framework-bundle" : "^3.4 || ^4.0",
-		"doctrine/cache" : "^1.8"
+		"symfony/framework-bundle" : "^3.4 || ^4.0"
 	},
 	"require-dev" : {
 		"jms/serializer-bundle" : "^2.3",
