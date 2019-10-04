@@ -3,22 +3,6 @@
 	"type" : "symfony-bundle",
 	"description" : "Help the user input high quality data into your web services REST",
 	"license" : "MIT",
-	"require" : {
-		"php" : ">=7.2",
-		"doctrine/annotations" : "^1.6",
-		"symfony/config" : "^3.4 || ^4.0",
-		"symfony/dependency-injection" : "^3.4 || ^4.0",
-		"symfony/http-kernel" : "^3.4 || ^4.0",
-		"symfony/security-core" : "^3.4 || ^4.0",
-		"symfony/translation" : "^3.4 || ^4.0",
-		"symfony/validator" : "^3.4 || ^4.0",
-		"symfony/serializer" : "^3.4 || ^4.0",
-		"symfony/framework-bundle": "^3.4 || ^4.0"
-	},
-	"suggest" : {
-		"jms/serializer-bundle" : "^2.3",
-		"symfony/form" : "^3.4 || ^4.0"
-	},
 	"keywords" : [
 		"REST",
 		"Input Validation",
@@ -42,6 +26,28 @@
 		"psr-4" : {
 			"Oka\\RESTRequestValidatorBundle\\Tests\\" : "tests/"
 		}
+	},
+	"require" : {
+		"php" : ">=7.2",
+		"doctrine/annotations" : "^1.6",
+		"symfony/config" : "^3.4 || ^4.0",
+		"symfony/dependency-injection" : "^3.4 || ^4.0",
+		"symfony/http-kernel" : "^3.4 || ^4.0",
+		"symfony/security-core" : "^3.4 || ^4.0",
+		"symfony/translation" : "^3.4 || ^4.0",
+		"symfony/validator" : "^3.4 || ^4.0",
+		"symfony/serializer" : "^3.4 || ^4.0",
+		"symfony/framework-bundle" : "^3.4 || ^4.0",
+		"doctrine/cache" : "^1.8"
+	},
+	"require-dev" : {
+		"jms/serializer-bundle" : "^2.3",
+		"symfony/form" : "^3.4 || ^4.0",
+		"symfony/phpunit-bridge" : "^3.4 || ^4.0"
+	},
+	"suggest" : {
+		"jms/serializer-bundle" : "^2.3",
+		"symfony/form" : "^3.4 || ^4.0"
 	},
 	"extra" : {
 		"branch-alias" : {
