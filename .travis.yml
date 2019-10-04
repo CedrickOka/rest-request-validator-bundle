@@ -18,6 +18,7 @@ before_install:
 
 install:
     - composer create-project "symfony/skeleton:${SKELETON_VERSION}" coka
+    - cd coka
 
 script:
     - composer req --ignore-platform-reqs coka/rest-request-validator-bundle
