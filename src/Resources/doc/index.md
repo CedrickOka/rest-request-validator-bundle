@@ -69,11 +69,13 @@ return [
 
 ### Step 3: Configure the Bundle
 
-Add the following configuration to your `config/packages/oka_rest_request_validator_bundle.yaml`.
+Add the following configuration to your `config/packages/oka_rest_request_validator.yaml`.
 
 ``` yaml
-# config/packages/oka_rest_request_validator_bundle.yaml
-oka_rest_request_validator_bundle:
+# config/packages/oka_rest_request_validator.yaml
+oka_rest_request_validator:
+    exception:
+        enabled: true
     response:
         error_builder_class: 'Oka\RESTRequestValidatorBundle\Util\ErrorResponseBuilder'
 ```

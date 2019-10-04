@@ -31,7 +31,7 @@ class Configuration implements ConfigurationInterface
 				->addDefaultsIfNotSet()
 				->children()
 					->arrayNode('exception')
-						->canBeDisabled()
+						->canBeEnabled()
 						->addDefaultsIfNotSet()
 						->children()
 							->scalarNode('controller')
