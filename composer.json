@@ -33,6 +33,7 @@
 		"doctrine/cache" : "^1.8",
 		"symfony/config" : "^3.4 || ^4.0",
 		"symfony/dependency-injection" : "^3.4 || ^4.0",
+		"symfony/doctrine-bridge" : "^3.4 || ^4.0",
 		"symfony/http-kernel" : "^3.4 || ^4.0",
 		"symfony/security-core" : "^3.4 || ^4.0",
 		"symfony/translation" : "^3.4 || ^4.0",
@@ -51,7 +52,7 @@
 	},
 	"extra" : {
 		"branch-alias" : {
-			"dev-master" : "1.x.x-dev"
+			"dev-master" : "2.x.x-dev"
 		},
 		"symfony" : {
 			"allow-contrib" : "true"

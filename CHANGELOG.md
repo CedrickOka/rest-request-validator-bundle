@@ -1,6 +1,10 @@
 Changelog
 =========
 
+#### 1.1.5 (2019-11-05)
+
+* Fixed bug class not loaded.
+
 #### 1.1.4 (2019-10-04)
 
 * Updated composer.json file.
