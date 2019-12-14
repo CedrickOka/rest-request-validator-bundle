@@ -1,6 +1,7 @@
 <?php
 namespace Oka\RESTRequestValidatorBundle\EventListener;
 
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener as BaseExceptionListener;
 
@@ -21,5 +22,15 @@ class ExceptionListener extends BaseExceptionListener
 		}
 		
 		parent::onKernelException($event);
+	}
+	
+	public static function getSubscribedEvents()
+	{
+	    return [
+	        KernelEvents::EXCEPTION => [
+	            ['logKernelException', 0],
+	            ['onKernelException', -127],
+	        ],
+	    ];
 	}
 }
