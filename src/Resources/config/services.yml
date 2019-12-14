@@ -1,10 +1,9 @@
 services:
-    Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory:
-        public: true
+    oka_rest_request_validator.error_response.factory:
         arguments: ['@translator', '']
 
-    oka_rest_request_validator.error_response.factory:
-        alias: Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory
+    Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory:
+        alias: oka_rest_request_validator.error_response.factory
         public: true
 
 # Listener
