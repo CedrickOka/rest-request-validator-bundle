@@ -1,6 +1,10 @@
 Changelog
 =========
 
+#### 1.2.0 (2019-14-14)
+
+* Patched security alerts.
+
 #### 1.1.5 (2019-11-05)
 
 * Fixed bug class not loaded.
