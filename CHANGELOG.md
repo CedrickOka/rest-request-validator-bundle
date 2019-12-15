@@ -1,7 +1,15 @@
 Changelog
 =========
 
-#### 1.2.0 (2019-14-14)
+#### 1.2.2 (2019-12-15)
+
+* Fixed bug.
+
+#### 1.2.1 (2019-12-14)
+
+* Improved service configuration.
+
+#### 1.2.0 (2019-12-14)
 
 * Patched security alerts.
 

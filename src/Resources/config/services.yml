@@ -1,5 +1,6 @@
 services:
     oka_rest_request_validator.error_response.factory:
+        class: Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory
         arguments: ['@translator', '']
 
     Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory:
