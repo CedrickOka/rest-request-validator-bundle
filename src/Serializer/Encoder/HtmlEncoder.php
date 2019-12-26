@@ -67,7 +67,7 @@ class HtmlEncoder implements EncoderInterface
 					$block .= $this->encodeBlock($value);
 					$block .= self::HTML_END_TAG_LIST_ITEM;
 				} else {
-					if (false === is_string($value) && false === is_numeric($value) && false === (is_object($value) && method_exists($value, '__toString'))) {
+				    if (null !== $value && false === is_string($value) && false === is_numeric($value) && false === (is_object($value) && method_exists($value, '__toString'))) {
 						throw new UnexpectedValueException(sprintf('The HtmlEncoder $value must be number or string or object implementing __toString(), "%s" given.', gettype($value)));
 					}
 					
