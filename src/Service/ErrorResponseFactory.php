@@ -10,7 +10,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * 
- * @author Cedrick Oka <okacedrick@gmail.com>
+ * @author Cedrick Oka Baidai <okacedrick@gmail.com>
  *
  */
 class ErrorResponseFactory

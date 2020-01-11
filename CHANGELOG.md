@@ -1,6 +1,10 @@
 Changelog
 =========
 
+#### 1.2.4 (2020-01-11)
+
+* [Container] Fixed bug service `oka_rest_request_validator.error_response.factory` ID removed or inlined.
+
 #### 1.2.3 (2019-12-26)
 
 * Fixed bug in HtmlEncoder.

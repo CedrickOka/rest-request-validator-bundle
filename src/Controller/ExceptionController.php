@@ -18,6 +18,14 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class ExceptionController extends AbstractController
 {
+    private $translator;
+    private $errorResponseFactory;
+    
+    public function __construct(TranslatorInterface $translator, ErrorResponseFactory $errorResponseFactory) {
+        $this->translator = $translator;
+        $this->errorResponseFactory = $errorResponseFactory;
+    }
+    
 	/**
 	 * Converts an Exception to a Response.
 	 *
@@ -35,11 +43,11 @@ class ExceptionController extends AbstractController
 		
 		switch (true) {
 			case $exception->getClass() === AuthenticationException::class:
-				return $this->get('oka_rest_request_validator.error_response.factory')->create($exception->getMessage(), 403, null, [], 403, [], $format);
+				return $this->errorResponseFactory->create($exception->getMessage(), 403, null, [], 403, [], $format);
 				
 			case $exception->getClass() === NotFoundHttpException::class:
-				return $this->get('oka_rest_request_validator.error_response.factory')->create(
-					$this->get('translator')->trans('request.resource.not_found', ['%resource%' => $request->getRequestUri()], 'OkaRESTRequestValidatorBundle'),
+				return $this->errorResponseFactory->create(
+					$this->translator->trans('request.resource.not_found', ['%resource%' => $request->getRequestUri()], 'OkaRESTRequestValidatorBundle'),
 					$exception->getStatusCode(),
 					null,
 					[],
@@ -49,8 +57,8 @@ class ExceptionController extends AbstractController
 				);
 				
 			default:
-				return $this->get('oka_rest_request_validator.error_response.factory')->create(
-					$this->get('translator')->trans($exception->getMessage(), [], 'OkaRESTRequestValidatorBundle'),
+				return $this->errorResponseFactory->create(
+					$this->translator->trans($exception->getMessage(), [], 'OkaRESTRequestValidatorBundle'),
 					$exception->getStatusCode(),
 					null,
 					[],
@@ -59,12 +67,5 @@ class ExceptionController extends AbstractController
 					$format
 				);
 		}
-	}
-	
-	public static function getSubscribedServices() {
-		return array_merge(parent::getSubscribedServices(), [
-				'translator' => '?'.TranslatorInterface::class,
-				'oka_rest_request_validator.error_response.factory' => '?'.ErrorResponseFactory::class
-		]);
 	}
 }
