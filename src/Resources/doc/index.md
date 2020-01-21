@@ -77,7 +77,9 @@ oka_rest_request_validator:
     exception:
         enabled: true
     response:
-        error_builder_class: 'Oka\RESTRequestValidatorBundle\Util\ErrorResponseBuilder'
+	     headers:
+	         server_time: true
+	     error_builder_class: 'Oka\RESTRequestValidatorBundle\Util\ErrorResponseBuilder'
 ```
 
 ## How use this?
