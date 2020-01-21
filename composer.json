@@ -39,7 +39,8 @@
 		"symfony/translation" : "^3.4 || ^4.2",
 		"symfony/validator" : "^3.4 || ^4.2",
 		"symfony/serializer" : "^3.4 || ^4.2",
-		"symfony/framework-bundle" : "^3.4 || ^4.2"
+		"symfony/framework-bundle" : "^3.4 || ^4.2",
+		"symfony/property-access": "^3.4 || ^4.2"
 	},
 	"require-dev" : {
 		"jms/serializer-bundle" : "^2.3",

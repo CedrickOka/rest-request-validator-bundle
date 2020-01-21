@@ -17,8 +17,3 @@ services:
         tags:
           - {name: kernel.event_listener, event: kernel.controller, method: onKernelController}
           - {name: monolog.logger, channel: request}
-
-    oka_rest_request_validator.response.event_listener:
-        class: Oka\RESTRequestValidatorBundle\EventListener\ResponseListener
-        tags:
-          - {name: kernel.event_listener, event: kernel.response, method: onKernelResponse}

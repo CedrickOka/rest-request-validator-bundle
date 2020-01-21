@@ -2,7 +2,7 @@
 namespace Oka\RESTRequestValidatorBundle\DependencyInjection;
 
 use Oka\RESTRequestValidatorBundle\EventListener\ExceptionListener;
-use Oka\RESTRequestValidatorBundle\Service\ErrorResponseFactory;
+use Oka\RESTRequestValidatorBundle\EventListener\ResponseListener;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -39,6 +39,11 @@ class OkaRESTRequestValidatorExtension extends Extension
 			$exceptionListener->addArgument(new Parameter('kernel.debug'));
 			$exceptionListener->addTag('kernel.event_subscriber');
 			$exceptionListener->addTag('monolog.logger', ['channel' => 'request']);
+		}
+		
+		if (true === $config['response']['headers']['enabled']) {
+		    $responseListener = $container->setDefinition(ResponseListener::class, new Definition(ResponseListener::class, [$config['response']['headers']]));
+		    $responseListener->addTag('kernel.event_listener', ['event' => 'kernel.response', 'method' => 'onKernelResponse']);
 		}
 	}
 }

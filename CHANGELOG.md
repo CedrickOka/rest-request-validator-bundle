@@ -1,6 +1,11 @@
 Changelog
 =========
 
+#### 1.3.0 (2020-01-21)
+
+* [Serializer] Fixed bug `The ObjectNormalizer class requires the "PropertyAccess" component. Install "symfony/property-access" to use it`.
+* [Configuration] Added new configuration value `oka_rest_request_validator.response.headers`.
+
 #### 1.2.4 (2020-01-11)
 
 * [Container] Fixed bug service `oka_rest_request_validator.error_response.factory` ID removed or inlined.
