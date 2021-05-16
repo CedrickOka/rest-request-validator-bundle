@@ -40,7 +40,7 @@
 		"symfony/validator" : "^3.4 || ^4.2",
 		"symfony/serializer" : "^3.4 || ^4.2",
 		"symfony/framework-bundle" : "^3.4 || ^4.2",
-		"symfony/property-access": "^3.4 || ^4.2"
+		"symfony/property-access" : "^3.4 || ^4.2"
 	},
 	"require-dev" : {
 		"jms/serializer-bundle" : "^2.3",
@@ -61,5 +61,6 @@
 	},
 	"support" : {
 		"docs" : "https://github.com/CedrickOka/rest-request-validator-bundle/blob/master/src/Resources/doc/index.md"
-	}
+	},
+	"abandoned" : true
 }
